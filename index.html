@@ -7,32 +7,50 @@
 <style>
 body {
   margin: 0;
-  background: #0a0a0a;
+  background: #050505;
   font-family: Arial;
   color: white;
 
-  /* 🧩 도트 느낌 배경 */
-  background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+/* 🌑 도트 연구실 배경 */
+  background-image: radial-gradient(#151515 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
 /* 🧪 연구실 공간 */
 .room {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-/* 🖥️ 모니터 */
+/* 🖥️ 컴퓨터 */
 .monitor {
-  width: 800px;
-  height: 500px;
+  width: 900px;
+  height: 520px;
   background: #111;
-  border: 8px solid #333;
+  border: 8px solid #2a2a2a;
   border-radius: 15px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  box-shadow: 0 0 40px rgba(0,0,0,0.9);
   position: relative;
+  overflow: hidden;
+}
+
+/* 상단 메뉴 */
+.menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: #1c1c1c;
+  border-bottom: 1px solid #333;
+}
+
+.menu button {
+  background: #222;
+  color: white;
+  border: 1px solid #444;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 /* 화면 */
@@ -52,7 +70,7 @@ body {
   background: #1f1f1f;
   border: 1px solid #333;
   border-radius: 10px;
-  padding: 15px;
+  padding: 18px;
   text-align: center;
   cursor: pointer;
   transition: 0.2s;
@@ -62,6 +80,16 @@ body {
   transform: scale(1.05);
   background: #2a2a2a;
 }
+
+/* 🧾 문서 화면 */
+.page {
+  display: none;
+  padding: 20px;
+}
+
+.page.active {
+  display: block;
+}
 </style>
 
 </head>
@@ -70,33 +98,70 @@ body {
 
 <div class="room">
 
-  <div class="monitor">
+<div class="monitor">
 
-    <div class="screen">
+<!-- 🧭 메뉴 -->
+<div class="menu">
+  <div>FABLE LAB SYSTEM</div>
+  <div>
+    <button onclick="show('home')">FILES</button>
+    <button onclick="show('world')">WORLD</button>
+  </div>
+</div>
 
-      <h3>FABLE LAB SYSTEM</h3>
+<!-- 📁 파일 화면 -->
+<div id="home" class="page active">
+  <div class="screen">
+    <div class="grid">
 
-      <div class="grid">
-
-        <div class="file" onclick="openChar('A')">🗂️ 캐릭터 A</div>
-        <div class="file" onclick="openChar('B')">🗂️ 캐릭터 B</div>
-        <div class="file" onclick="openChar('C')">🗂️ 캐릭터 C</div>
-        <div class="file" onclick="openChar('D')">🗂️ 캐릭터 D</div>
-        <div class="file" onclick="openChar('E')">🗂️ 캐릭터 E</div>
-        <div class="file" onclick="openChar('F')">🗂️ 캐릭터 F</div>
-
-      </div>
+      <div class="file" onclick="openChar('A')">🗂️ Character A</div>
+      <div class="file" onclick="openChar('B')">🗂️ Character B</div>
+      <div class="file" onclick="openChar('C')">🗂️ Character C</div>
+      <div class="file" onclick="openChar('D')">🗂️ Character D</div>
+      <div class="file" onclick="openChar('E')">🗂️ Character E</div>
+      <div class="file" onclick="openChar('F')">🗂️ Character F</div>
 
     </div>
-
   </div>
+</div>
+
+<!-- 📜 세계관 문서 -->
+<div id="world" class="page">
+  <div class="screen">
+    <h2>WORLD FILE</h2>
+    <p>여기에 세계관 설정을 문서처럼 적으면 됨.</p>
+    <p>- 연구소는 폐쇄됨</p>
+    <p>- 파일들은 금지된 데이터</p>
+    <p>- 캐릭터는 실험체</p>
+  </div>
+</div>
+
+</div>
 
 </div>
 
 <script>
-function openChar(name) {
-  window.location.href = name + ".html";
+
+/* 📂 화면 전환 */
+function show(page) {
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+  });
+  document.getElementById(page).classList.add('active');
 }
+
+/* 🧠 캐릭터 파일 클릭 */
+function openChar(name) {
+  alert("Character " + name + " 파일 로딩 중...");
+  document.getElementById('home').innerHTML = `
+    <div class="screen">
+      <h2>CHARACTER `+name+`</h2>
+      <p>여기에 캐릭터 설명을 넣으면 됨.</p>
+      <button onclick="location.reload()">← BACK</button>
+    </div>
+  `;
+}
+
 </script>
 
 </body>
