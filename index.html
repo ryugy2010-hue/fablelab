@@ -2,86 +2,65 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>WORLD FILE SYSTEM</title>
+<title>FABLE LAB</title>
 
 <style>
 body {
   margin: 0;
-  background: #0b0b0b;
+  background: #0a0a0a;
   font-family: Arial;
   color: white;
+
+  /* 🧩 도트 느낌 배경 */
+  background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+  background-size: 10px 10px;
 }
 
-/* 🪟 전체 창 */
-.window {
-  width: 90%;
-  max-width: 1000px;
-  margin: 40px auto;
-  border: 2px solid #333;
-  border-radius: 10px;
-  background: #141414;
-  overflow: hidden;
+/* 🧪 연구실 공간 */
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* 상단 바 */
-.titlebar {
-  background: #222;
-  padding: 10px 15px;
-  font-weight: bold;
+/* 🖥️ 모니터 */
+.monitor {
+  width: 800px;
+  height: 500px;
+  background: #111;
+  border: 8px solid #333;
+  border-radius: 15px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  position: relative;
 }
 
-/* 📁 내부 그리드 */
+/* 화면 */
+.screen {
+  padding: 20px;
+}
+
+/* 파일 그리드 */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
-  padding: 20px;
 }
 
-/* 🗂️ 파일 카드 */
+/* 📁 파일 */
 .file {
   background: #1f1f1f;
   border: 1px solid #333;
   border-radius: 10px;
   padding: 15px;
+  text-align: center;
   cursor: pointer;
   transition: 0.2s;
-
-  /* 👉 파일 느낌 핵심 */
-  position: relative;
-  overflow: hidden;
 }
 
-/* 폴더 탭처럼 보이는 윗부분 */
-.file::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 10px;
-  background: #444;
-  border-bottom-right-radius: 5px;
-}
-
-/* hover 효과 */
 .file:hover {
-  transform: translateY(-3px);
+  transform: scale(1.05);
   background: #2a2a2a;
-  border-color: #666;
-}
-
-/* 아이콘 */
-.icon {
-  font-size: 35px;
-  margin-top: 10px;
-}
-
-/* 이름 */
-.name {
-  margin-top: 10px;
-  font-size: 14px;
-  opacity: 0.9;
 }
 </style>
 
@@ -89,47 +68,36 @@ body {
 
 <body>
 
-<div class="window">
+<div class="room">
 
-  <div class="titlebar">
-    📁 WORLD FILE SYSTEM
-  </div>
+  <div class="monitor">
 
-  <div class="grid">
+    <div class="screen">
 
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">캐릭터 A</div>
-    </div>
+      <h3>FABLE LAB SYSTEM</h3>
 
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">캐릭터 B</div>
-    </div>
+      <div class="grid">
 
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">세계관 설정</div>
-    </div>
+        <div class="file" onclick="openChar('A')">🗂️ 캐릭터 A</div>
+        <div class="file" onclick="openChar('B')">🗂️ 캐릭터 B</div>
+        <div class="file" onclick="openChar('C')">🗂️ 캐릭터 C</div>
+        <div class="file" onclick="openChar('D')">🗂️ 캐릭터 D</div>
+        <div class="file" onclick="openChar('E')">🗂️ 캐릭터 E</div>
+        <div class="file" onclick="openChar('F')">🗂️ 캐릭터 F</div>
 
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">조직</div>
-    </div>
+      </div>
 
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">이벤트 기록</div>
-    </div>
-
-    <div class="file">
-      <div class="icon">🗂️</div>
-      <div class="name">비밀 문서</div>
     </div>
 
   </div>
 
 </div>
+
+<script>
+function openChar(name) {
+  window.location.href = name + ".html";
+}
+</script>
 
 </body>
 </html>
