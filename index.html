@@ -2,48 +2,86 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>세계관 파일</title>
+<title>WORLD FILE SYSTEM</title>
 
 <style>
 body {
-  background: #0f0f0f;
-  color: white;
-  font-family: Arial;
   margin: 0;
-  padding: 40px;
+  background: #0b0b0b;
+  font-family: Arial;
+  color: white;
 }
 
-/* 🔷 2x3 그리드 */
+/* 🪟 전체 창 */
+.window {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background: #141414;
+  overflow: hidden;
+}
+
+/* 상단 바 */
+.titlebar {
+  background: #222;
+  padding: 10px 15px;
+  font-weight: bold;
+}
+
+/* 📁 내부 그리드 */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3열 */
-  gap: 20px;
-  max-width: 900px;
-  margin: auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
 }
 
 /* 🗂️ 파일 카드 */
 .file {
-  background: #1c1c1c;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 15px;
   cursor: pointer;
   transition: 0.2s;
+
+  /* 👉 파일 느낌 핵심 */
+  position: relative;
+  overflow: hidden;
 }
 
+/* 폴더 탭처럼 보이는 윗부분 */
+.file::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 10px;
+  background: #444;
+  border-bottom-right-radius: 5px;
+}
+
+/* hover 효과 */
 .file:hover {
-  transform: scale(1.05);
+  transform: translateY(-3px);
   background: #2a2a2a;
+  border-color: #666;
 }
 
 /* 아이콘 */
 .icon {
-  font-size: 40px;
+  font-size: 35px;
+  margin-top: 10px;
 }
 
+/* 이름 */
 .name {
   margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.9;
 }
 </style>
 
@@ -51,38 +89,44 @@ body {
 
 <body>
 
-<h1 style="text-align:center;">📁 WORLD FILES</h1>
+<div class="window">
 
-<div class="grid">
-
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">캐릭터 A</div>
+  <div class="titlebar">
+    📁 WORLD FILE SYSTEM
   </div>
 
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">캐릭터 B</div>
-  </div>
+  <div class="grid">
 
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">세계관 설정</div>
-  </div>
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">캐릭터 A</div>
+    </div>
 
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">조직</div>
-  </div>
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">캐릭터 B</div>
+    </div>
 
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">이벤트 기록</div>
-  </div>
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">세계관 설정</div>
+    </div>
 
-  <div class="file">
-    <div class="icon">🗂️</div>
-    <div class="name">비밀 문서</div>
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">조직</div>
+    </div>
+
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">이벤트 기록</div>
+    </div>
+
+    <div class="file">
+      <div class="icon">🗂️</div>
+      <div class="name">비밀 문서</div>
+    </div>
+
   </div>
 
 </div>
