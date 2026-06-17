@@ -36,3 +36,94 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>세계관 파일</title>
+
+<style>
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial;
+  margin: 0;
+  padding: 40px;
+}
+
+/* 🔷 2x3 그리드 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열 */
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* 🗂️ 파일 카드 */
+.file {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.file:hover {
+  transform: scale(1.05);
+  background: #2a2a2a;
+}
+
+/* 아이콘 */
+.icon {
+  font-size: 40px;
+}
+
+.name {
+  margin-top: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 style="text-align:center;">📁 WORLD FILES</h1>
+
+<div class="grid">
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">이상</div>
+  </div>
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">윤동주</div>
+  </div>
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">◼️◼️◼️◼️◼️◼️◼️</div>
+  </div>
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">◼️◼️</div>
+  </div>
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">◼️◼️◼️</div>
+  </div>
+
+  <div class="file">
+    <div class="icon">🗂️</div>
+    <div class="name">◼️◼️◼️ ◼️◼️</div>
+  </div>
+
+</div>
+
+</body>
+</html>
