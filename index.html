@@ -2,103 +2,93 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FABLE LAB SYSTEM</title>
+<title>FABLE LAB FILE SYSTEM</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial;
-  background: #050505;
-  color: white;
-
-  /* 🔬 연구실 느낌 도트 */
-  background-image: radial-gradient(#151515 1px, transparent 1px);
-  background-size: 10px 10px;
-}
-
-/* 🧪 전체 연구실 */
-.room {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 🖥️ 큰 컴퓨터 */
-.monitor {
-  width: 1000px;
-  height: 600px;
-  background: #0f0f0f;
-  border: 8px solid #2a2a2a;
-  border-radius: 15px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+
+  /* 🌑 연구실 배경 */
+  background: url("https://raw.githubusercontent.com/ryugy2010-hue/Webtoon/main/IMG_0623.jpeg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* 🧭 상단 바 (Replit 느낌 핵심) */
-.topbar {
-  background: #1c1c1c;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #333;
+/* 어두운 오버레이 */
+.overlayDark {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
 }
 
-/* 버튼 */
-.topbar button {
-  background: #222;
-  color: white;
-  border: 1px solid #444;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* 📺 화면 */
-.screen {
-  flex: 1;
-  display: none;
-  padding: 20px;
-}
-
-.screen.active {
-  display: block;
-}
-
-/* 🖥️ 데스크톱 아이콘 */
+/* 🖥️ 파일 화면 */
 .desktop {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 130px);
+  grid-template-columns: repeat(3, 140px);
   gap: 25px;
-  padding: 20px;
+  padding: 60px;
 }
 
-/* 🟨 파일 아이콘 (진짜 OS 느낌) */
+/* 📁 파일 아이콘 */
 .file {
-  width: 110px;
-  height: 110px;
-  background: #f1c40f;
-  border-radius: 10px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 215, 0, 0.9);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 5px 0 #b7950b;
-  transition: 0.2s;
-  color: black;
   font-weight: bold;
+  color: black;
+  box-shadow: 0 6px 0 #b7950b;
+  transition: 0.2s;
 }
 
 .file:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
-/* 📄 문서 */
-.doc {
-  background: #111;
-  padding: 20px;
-  border: 1px solid #333;
+/* 🧾 보고서 창 */
+.report {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 420px;
+  background: #f5f1e6;
+  color: #111;
+  padding: 25px;
+  border: 2px solid #c9c2a6;
+  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  display: none;
+  overflow-y: auto;
+  font-family: "Times New Roman", serif;
+}
+
+/* 사진 */
+.report img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid #333;
+  float: right;
+  margin-left: 15px;
+}
+
+/* 닫기 */
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-weight: bold;
 }
 </style>
 
@@ -106,77 +96,62 @@ body {
 
 <body>
 
-<div class="room">
+<div class="overlayDark"></div>
 
-<div class="monitor">
+<!-- 🖥️ 파일 6개 -->
+<div class="desktop">
 
-<!-- 🧭 TOP BAR -->
-<div class="topbar">
-  <div>FABLE LAB</div>
-  <div>
-    <button onclick="show('home')">FILES</button>
-    <button onclick="show('world')">WORLD</button>
-    <button onclick="back()">BACK</button>
-  </div>
-</div>
-
-<!-- 🖥️ 메인 화면 -->
-<div id="home" class="screen active">
-  <div class="desktop">
-
-    <div class="file" onclick="openChar('A')">🗂️ A</div>
-    <div class="file" onclick="openChar('B')">🗂️ B</div>
-    <div class="file" onclick="openChar('C')">🗂️ C</div>
-    <div class="file" onclick="openChar('D')">🗂️ D</div>
-    <div class="file" onclick="openChar('E')">🗂️ E</div>
-    <div class="file" onclick="openChar('F')">🗂️ F</div>
-
-  </div>
-</div>
-
-<!-- 📂 캐릭터 화면 -->
-<div id="char" class="screen">
-  <div class="doc" id="charContent">
-    캐릭터 정보
-  </div>
-</div>
-
-<!-- 📜 세계관 화면 -->
-<div id="world" class="screen">
-  <div class="doc">
-    <h2>WORLD FILE</h2>
-    <p>연구소 기록 / 세계관 설정</p>
-  </div>
-</div>
+  <div class="file" onclick="openChar('lee')">🗂 이상</div>
+  <div class="file" onclick="openChar('yoon')">🗂 윤동주</div>
+  <div class="file" onclick="openChar('c3')">🗂 FILE 3</div>
+  <div class="file" onclick="openChar('c4')">🗂 FILE 4</div>
+  <div class="file" onclick="openChar('c5')">🗂 FILE 5</div>
+  <div class="file" onclick="openChar('c6')">🗂 FILE 6</div>
 
 </div>
 
+<!-- 📄 보고서 창 -->
+<div id="report" class="report">
+  <div class="closeBtn" onclick="closeReport()">✖</div>
+  <div id="content"></div>
 </div>
 
 <script>
 
-let current = "home";
-
-/* 화면 전환 */
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => {
-    s.classList.remove('active');
-  });
-  document.getElementById(id).classList.add('active');
-  current = id;
-}
-
-/* 캐릭터 열기 */
 function openChar(name) {
-  document.getElementById('charContent').innerHTML =
-    `<h2>CHARACTER `+name+`</h2><p>여기에 설정 입력</p>`;
 
-  show('char');
+  let data = "";
+
+  if(name === "lee") {
+    data = `
+      <h2>인사 보고서 - 이상</h2>
+      <img src="https://raw.githubusercontent.com/ryugy2010-hue/Webtoon/main/lee.webp">
+      <p><b>이름:</b> 이상</p>
+      <p><b>나이:</b> 미상</p>
+      <p><b>소속:</b> 연구소 제3연구실</p>
+      <p><b>특이사항:</b> 전생기억보유</p>
+      <p><b>능력:</b> [날개] - 순간적으로 몸의 모든 것을 회복. 하루 1회 사용.</p>
+    `;
+  }
+
+  if(name === "yoon") {
+    data = `
+      <h2>인사 보고서 - 윤동주</h2>
+      <img src="https://raw.githubusercontent.com/ryugy2010-hue/Webtoon/main/yoon.webp">
+      <p><b>이름:</b> 윤동주</p>
+      <p><b>나이:</b> 미상</p>
+      <p><b>소속:</b> 연구소 제3연구실</p>
+      <p><b>특이사항:</b> 전생기억보유</p>
+      <p><b>능력:</b> [서시] - 모든 정신공격 완전면역</p>
+    `;
+  }
+
+  document.getElementById("content").innerHTML = data;
+  document.getElementById("report").style.display = "block";
 }
 
-/* 뒤로가기 */
-function back() {
-  show('home');
+function closeReport() {
+  document.getElementById("report").style.display = "none";
 }
 
 </script>
