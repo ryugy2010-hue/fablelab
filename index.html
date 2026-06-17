@@ -2,21 +2,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FABLE LAB</title>
+<title>FABLE LAB SYSTEM</title>
 
 <style>
 body {
   margin: 0;
-  background: #050505;
   font-family: Arial;
+  background: #050505;
   color: white;
 
-  /* 🌑 연구실 도트 배경 */
+  /* 🔬 연구실 느낌 도트 */
   background-image: radial-gradient(#151515 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
-/* 🧪 연구실 */
+/* 🧪 전체 연구실 */
 .room {
   height: 100vh;
   display: flex;
@@ -24,81 +24,81 @@ body {
   align-items: center;
 }
 
-/* 🖥️ 모니터 */
+/* 🖥️ 큰 컴퓨터 */
 .monitor {
-  width: 900px;
-  height: 520px;
+  width: 1000px;
+  height: 600px;
   background: #0f0f0f;
   border: 8px solid #2a2a2a;
   border-radius: 15px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.9);
-  position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* 상단 바 */
-.menu {
+/* 🧭 상단 바 (Replit 느낌 핵심) */
+.topbar {
   background: #1c1c1c;
-  padding: 10px 15px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #333;
 }
 
-/* 🧭 화면 */
+/* 버튼 */
+.topbar button {
+  background: #222;
+  color: white;
+  border: 1px solid #444;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* 📺 화면 */
 .screen {
+  flex: 1;
+  display: none;
   padding: 20px;
 }
 
-/* 🟨 아이콘 바탕화면 */
+.screen.active {
+  display: block;
+}
+
+/* 🖥️ 데스크톱 아이콘 */
 .desktop {
   display: grid;
-  grid-template-columns: repeat(3, 120px);
+  grid-template-columns: repeat(3, 130px);
   gap: 25px;
   padding: 20px;
 }
 
-/* 🟨 폴더 아이콘 */
-.icon {
-  width: 100px;
-  height: 80px;
-  background: #f1c40f; /* 🔥 노란색 */
-  border-radius: 8px;
-  position: relative;
+/* 🟨 파일 아이콘 (진짜 OS 느낌) */
+.file {
+  width: 110px;
+  height: 110px;
+  background: #f1c40f;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  transition: 0.2s;
   box-shadow: 0 5px 0 #b7950b;
+  transition: 0.2s;
+  color: black;
+  font-weight: bold;
 }
 
-/* 폴더 윗탭 */
-.icon::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: 10px;
-  width: 40px;
-  height: 12px;
-  background: #d4ac0d;
-  border-radius: 3px 3px 0 0;
-}
-
-/* hover 효과 */
-.icon:hover {
+.file:hover {
   transform: translateY(-3px);
 }
 
-/* 이름 */
-.label {
-  text-align: center;
-  margin-top: 5px;
-  font-size: 12px;
-}
-
-/* 아이콘 전체 */
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* 📄 문서 */
+.doc {
+  background: #111;
+  padding: 20px;
+  border: 1px solid #333;
 }
 </style>
 
@@ -110,58 +110,43 @@ body {
 
 <div class="monitor">
 
-<!-- 🧭 메뉴 -->
-<div class="menu">
-  <div>FABLE LAB SYSTEM</div>
+<!-- 🧭 TOP BAR -->
+<div class="topbar">
+  <div>FABLE LAB</div>
   <div>
-    <button onclick="show('home')">DESKTOP</button>
+    <button onclick="show('home')">FILES</button>
     <button onclick="show('world')">WORLD</button>
+    <button onclick="back()">BACK</button>
   </div>
 </div>
 
-<!-- 🖥️ 데스크톱 -->
-<div id="home" class="screen">
-
+<!-- 🖥️ 메인 화면 -->
+<div id="home" class="screen active">
   <div class="desktop">
 
-    <div class="item" onclick="openChar('A')">
-      <div class="icon"></div>
-      <div class="label">A FILE</div>
-    </div>
-
-    <div class="item" onclick="openChar('B')">
-      <div class="icon"></div>
-      <div class="label">B FILE</div>
-    </div>
-
-    <div class="item" onclick="openChar('C')">
-      <div class="icon"></div>
-      <div class="label">C FILE</div>
-    </div>
-
-    <div class="item" onclick="openChar('D')">
-      <div class="icon"></div>
-      <div class="label">D FILE</div>
-    </div>
-
-    <div class="item" onclick="openChar('E')">
-      <div class="icon"></div>
-      <div class="label">E FILE</div>
-    </div>
-
-    <div class="item" onclick="openChar('F')">
-      <div class="icon"></div>
-      <div class="label">F FILE</div>
-    </div>
+    <div class="file" onclick="openChar('A')">🗂️ A</div>
+    <div class="file" onclick="openChar('B')">🗂️ B</div>
+    <div class="file" onclick="openChar('C')">🗂️ C</div>
+    <div class="file" onclick="openChar('D')">🗂️ D</div>
+    <div class="file" onclick="openChar('E')">🗂️ E</div>
+    <div class="file" onclick="openChar('F')">🗂️ F</div>
 
   </div>
-
 </div>
 
-<!-- 📜 세계관 -->
-<div id="world" class="screen" style="display:none;">
-  <h2>WORLD FILE</h2>
-  <p>여기에 세계관 문서 입력</p>
+<!-- 📂 캐릭터 화면 -->
+<div id="char" class="screen">
+  <div class="doc" id="charContent">
+    캐릭터 정보
+  </div>
+</div>
+
+<!-- 📜 세계관 화면 -->
+<div id="world" class="screen">
+  <div class="doc">
+    <h2>WORLD FILE</h2>
+    <p>연구소 기록 / 세계관 설정</p>
+  </div>
 </div>
 
 </div>
@@ -170,23 +155,28 @@ body {
 
 <script>
 
-/* 화면 전환 */
-function show(page) {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('world').style.display = 'none';
+let current = "home";
 
-  document.getElementById(page).style.display = 'block';
+/* 화면 전환 */
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
+  current = id;
 }
 
 /* 캐릭터 열기 */
 function openChar(name) {
-  document.getElementById('home').innerHTML = `
-    <div style="padding:20px;">
-      <h2>CHARACTER `+name+`</h2>
-      <p>여기에 캐릭터 설명</p>
-      <button onclick="location.reload()">← BACK</button>
-    </div>
-  `;
+  document.getElementById('charContent').innerHTML =
+    `<h2>CHARACTER `+name+`</h2><p>여기에 설정 입력</p>`;
+
+  show('char');
+}
+
+/* 뒤로가기 */
+function back() {
+  show('home');
 }
 
 </script>
