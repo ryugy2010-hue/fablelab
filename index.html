@@ -11,12 +11,12 @@ body {
   font-family: Arial;
   color: white;
 
-/* 🌑 도트 연구실 배경 */
+  /* 🌑 연구실 도트 배경 */
   background-image: radial-gradient(#151515 1px, transparent 1px);
   background-size: 10px 10px;
 }
 
-/* 🧪 연구실 공간 */
+/* 🧪 연구실 */
 .room {
   height: 100vh;
   display: flex;
@@ -24,11 +24,11 @@ body {
   align-items: center;
 }
 
-/* 🖥️ 컴퓨터 */
+/* 🖥️ 모니터 */
 .monitor {
   width: 900px;
   height: 520px;
-  background: #111;
+  background: #0f0f0f;
   border: 8px solid #2a2a2a;
   border-radius: 15px;
   box-shadow: 0 0 40px rgba(0,0,0,0.9);
@@ -36,59 +36,69 @@ body {
   overflow: hidden;
 }
 
-/* 상단 메뉴 */
+/* 상단 바 */
 .menu {
+  background: #1c1c1c;
+  padding: 10px 15px;
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
-  background: #1c1c1c;
   border-bottom: 1px solid #333;
 }
 
-.menu button {
-  background: #222;
-  color: white;
-  border: 1px solid #444;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-/* 화면 */
+/* 🧭 화면 */
 .screen {
   padding: 20px;
 }
 
-/* 파일 그리드 */
-.grid {
+/* 🟨 아이콘 바탕화면 */
+.desktop {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-}
-
-/* 📁 파일 */
-.file {
-  background: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 10px;
-  padding: 18px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.file:hover {
-  transform: scale(1.05);
-  background: #2a2a2a;
-}
-
-/* 🧾 문서 화면 */
-.page {
-  display: none;
+  grid-template-columns: repeat(3, 120px);
+  gap: 25px;
   padding: 20px;
 }
 
-.page.active {
-  display: block;
+/* 🟨 폴더 아이콘 */
+.icon {
+  width: 100px;
+  height: 80px;
+  background: #f1c40f; /* 🔥 노란색 */
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 5px 0 #b7950b;
+}
+
+/* 폴더 윗탭 */
+.icon::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  width: 40px;
+  height: 12px;
+  background: #d4ac0d;
+  border-radius: 3px 3px 0 0;
+}
+
+/* hover 효과 */
+.icon:hover {
+  transform: translateY(-3px);
+}
+
+/* 이름 */
+.label {
+  text-align: center;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* 아이콘 전체 */
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
 
@@ -104,36 +114,54 @@ body {
 <div class="menu">
   <div>FABLE LAB SYSTEM</div>
   <div>
-    <button onclick="show('home')">FILES</button>
+    <button onclick="show('home')">DESKTOP</button>
     <button onclick="show('world')">WORLD</button>
   </div>
 </div>
 
-<!-- 📁 파일 화면 -->
-<div id="home" class="page active">
-  <div class="screen">
-    <div class="grid">
+<!-- 🖥️ 데스크톱 -->
+<div id="home" class="screen">
 
-      <div class="file" onclick="openChar('A')">🗂️ Character A</div>
-      <div class="file" onclick="openChar('B')">🗂️ Character B</div>
-      <div class="file" onclick="openChar('C')">🗂️ Character C</div>
-      <div class="file" onclick="openChar('D')">🗂️ Character D</div>
-      <div class="file" onclick="openChar('E')">🗂️ Character E</div>
-      <div class="file" onclick="openChar('F')">🗂️ Character F</div>
+  <div class="desktop">
 
+    <div class="item" onclick="openChar('A')">
+      <div class="icon"></div>
+      <div class="label">A FILE</div>
     </div>
+
+    <div class="item" onclick="openChar('B')">
+      <div class="icon"></div>
+      <div class="label">B FILE</div>
+    </div>
+
+    <div class="item" onclick="openChar('C')">
+      <div class="icon"></div>
+      <div class="label">C FILE</div>
+    </div>
+
+    <div class="item" onclick="openChar('D')">
+      <div class="icon"></div>
+      <div class="label">D FILE</div>
+    </div>
+
+    <div class="item" onclick="openChar('E')">
+      <div class="icon"></div>
+      <div class="label">E FILE</div>
+    </div>
+
+    <div class="item" onclick="openChar('F')">
+      <div class="icon"></div>
+      <div class="label">F FILE</div>
+    </div>
+
   </div>
+
 </div>
 
-<!-- 📜 세계관 문서 -->
-<div id="world" class="page">
-  <div class="screen">
-    <h2>WORLD FILE</h2>
-    <p>여기에 세계관 설정을 문서처럼 적으면 됨.</p>
-    <p>- 연구소는 폐쇄됨</p>
-    <p>- 파일들은 금지된 데이터</p>
-    <p>- 캐릭터는 실험체</p>
-  </div>
+<!-- 📜 세계관 -->
+<div id="world" class="screen" style="display:none;">
+  <h2>WORLD FILE</h2>
+  <p>여기에 세계관 문서 입력</p>
 </div>
 
 </div>
@@ -142,21 +170,20 @@ body {
 
 <script>
 
-/* 📂 화면 전환 */
+/* 화면 전환 */
 function show(page) {
-  document.querySelectorAll('.page').forEach(p => {
-    p.classList.remove('active');
-  });
-  document.getElementById(page).classList.add('active');
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('world').style.display = 'none';
+
+  document.getElementById(page).style.display = 'block';
 }
 
-/* 🧠 캐릭터 파일 클릭 */
+/* 캐릭터 열기 */
 function openChar(name) {
-  alert("Character " + name + " 파일 로딩 중...");
   document.getElementById('home').innerHTML = `
-    <div class="screen">
+    <div style="padding:20px;">
       <h2>CHARACTER `+name+`</h2>
-      <p>여기에 캐릭터 설명을 넣으면 됨.</p>
+      <p>여기에 캐릭터 설명</p>
       <button onclick="location.reload()">← BACK</button>
     </div>
   `;
