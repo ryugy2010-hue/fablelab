@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>FABLE LAB FILE SYSTEM</title>
+<title>FABLE LAB SYSTEM</title>
 
 <style>
 body {
   margin: 0;
-  font-family: Arial;
   overflow: hidden;
+  font-family: Arial;
 
   /* 🌑 연구실 배경 */
   background: url("https://raw.githubusercontent.com/ryugy2010-hue/Webtoon/main/IMG_0623.jpeg") no-repeat center center fixed;
@@ -16,28 +16,68 @@ body {
 }
 
 /* 어두운 오버레이 */
-.overlayDark {
-  position: absolute;
+.overlay {
+  position: fixed;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.65);
 }
 
-/* 🖥️ 파일 화면 */
-.desktop {
+/* 🧪 연구실 전체 */
+.room {
   position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(3, 140px);
-  gap: 25px;
-  padding: 60px;
 }
 
-/* 📁 파일 아이콘 */
+/* 🖥️ 거대한 컴퓨터 모형 */
+.monitor {
+  width: 1200px;
+  height: 700px;
+  background: #111;
+  border: 12px solid #2b2b2b;
+  border-radius: 20px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 상단 바 */
+.topbar {
+  background: #1c1c1c;
+  padding: 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+}
+
+/* 🖥️ 화면 */
+.screen {
+  flex: 1;
+  position: relative;
+  background: rgba(0,0,0,0.4);
+}
+
+/* 🟨 파일 아이콘 배치 */
+.desktop {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 140px);
+  gap: 30px;
+}
+
+/* 🟨 파일 */
 .file {
   width: 120px;
   height: 120px;
-  background: rgba(255, 215, 0, 0.9);
+  background: #f1c40f;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -51,10 +91,10 @@ body {
 }
 
 .file:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
 
-/* 🧾 보고서 창 */
+/* 📄 보고서 */
 .report {
   position: fixed;
   top: 50%;
@@ -63,13 +103,12 @@ body {
   width: 600px;
   height: 420px;
   background: #f5f1e6;
-  color: #111;
-  padding: 25px;
   border: 2px solid #c9c2a6;
-  box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  padding: 25px;
   display: none;
   overflow-y: auto;
   font-family: "Times New Roman", serif;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
 
 /* 사진 */
@@ -77,13 +116,13 @@ body {
   width: 120px;
   height: 150px;
   object-fit: cover;
-  border: 2px solid #333;
   float: right;
   margin-left: 15px;
+  border: 2px solid #333;
 }
 
 /* 닫기 */
-.closeBtn {
+.close {
   position: absolute;
   top: 10px;
   right: 15px;
@@ -96,23 +135,42 @@ body {
 
 <body>
 
-<div class="overlayDark"></div>
+<div class="overlay"></div>
 
-<!-- 🖥️ 파일 6개 -->
-<div class="desktop">
+<div class="room">
 
-  <div class="file" onclick="openChar('lee')">🗂 이상</div>
-  <div class="file" onclick="openChar('yoon')">🗂 윤동주</div>
-  <div class="file" onclick="openChar('c3')">🗂 FILE 3</div>
-  <div class="file" onclick="openChar('c4')">🗂 FILE 4</div>
-  <div class="file" onclick="openChar('c5')">🗂 FILE 5</div>
-  <div class="file" onclick="openChar('c6')">🗂 FILE 6</div>
+  <div class="monitor">
+
+    <!-- 🧭 상단 -->
+    <div class="topbar">
+      <div>FABLE LAB SYSTEM</div>
+      <div>RESEARCH TERMINAL</div>
+    </div>
+
+    <!-- 🖥️ 화면 -->
+    <div class="screen">
+
+      <!-- 🟨 파일 -->
+      <div class="desktop">
+
+        <div class="file" onclick="openChar('lee')">🗂 이상</div>
+        <div class="file" onclick="openChar('yoon')">🗂 윤동주</div>
+        <div class="file" onclick="openChar('c3')">🗂 FILE 3</div>
+        <div class="file" onclick="openChar('c4')">🗂 FILE 4</div>
+        <div class="file" onclick="openChar('c5')">🗂 FILE 5</div>
+        <div class="file" onclick="openChar('c6')">🗂 FILE 6</div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
-<!-- 📄 보고서 창 -->
+<!-- 📄 보고서 -->
 <div id="report" class="report">
-  <div class="closeBtn" onclick="closeReport()">✖</div>
+  <div class="close" onclick="closeReport()">✖</div>
   <div id="content"></div>
 </div>
 
@@ -130,7 +188,7 @@ function openChar(name) {
       <p><b>나이:</b> 미상</p>
       <p><b>소속:</b> 연구소 제3연구실</p>
       <p><b>특이사항:</b> 전생기억보유</p>
-      <p><b>능력:</b> [날개] - 순간적으로 몸의 모든 것을 회복. 하루 1회 사용.</p>
+      <p><b>능력:</b> [날개] - 순간 회복 (1회/일)</p>
     `;
   }
 
@@ -142,7 +200,7 @@ function openChar(name) {
       <p><b>나이:</b> 미상</p>
       <p><b>소속:</b> 연구소 제3연구실</p>
       <p><b>특이사항:</b> 전생기억보유</p>
-      <p><b>능력:</b> [서시] - 모든 정신공격 완전면역</p>
+      <p><b>능력:</b> [서시] - 정신 공격 완전면역</p>
     `;
   }
 
